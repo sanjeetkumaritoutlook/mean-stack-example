@@ -49,7 +49,7 @@ app.get('/tproute', function (req, res) {
 // grab the student model we just created
 var Student = require('./app/models/students');
 app.get('/api/students', function(req, res) {
-   // use mongoose to get all students in the database
+   // use mongoose to get all students from the database
    Student.find().then(function(err, students) {
       // if there is an error retrieving, send the error.
       // nothing after res.send(err) will execute

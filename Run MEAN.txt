@@ -17,7 +17,7 @@ In a MEAN stack, the server-side is typically managed using Node.js with Express
 to run server:
 npx ts-node src/server.ts
 
-http://localhost:3000/employees
+
 This will call the /employees endpoint and should return the list of employees if the database is populated.
 •	Ensure that MongoDB is running locally or is properly connected to your cloud database.
 
@@ -30,11 +30,11 @@ The port 27017 is for database communication (backend ↔ MongoDB).
 Both ports are unrelated, so there’s no conflict.
 
 -----
-earlier .env file
------
- ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/meanStackExample?retryWrites=true&w=majority
+----
+another outside app running fetch data from db
+http://localhost:3000/api/students
 
-now :
+
 
 
 

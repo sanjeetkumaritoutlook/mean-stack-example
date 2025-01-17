@@ -1,6 +1,9 @@
 ## first is a standalone server that updates mongodb students 
 run
 node server.js
+http://localhost:3000/
+http://localhost:3000/tproute
+http://localhost:3000/api/students
 
 ## Database
 A database in MongoDB is a container that holds one or more collections. It is similar to a database in a traditional relational database system.
@@ -23,7 +26,7 @@ show collections;
 Create a collection (optional, usually created when inserting data):
 db.createCollection("collectionName");
 
-## main MEAN app named-> mean-stack-Examples
+## main MEAN app named-> mean-stack-example
 ### client
 run : ng s
 ng help
