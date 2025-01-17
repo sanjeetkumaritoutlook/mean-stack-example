@@ -1,0 +1,45 @@
+client
+cd D:\Sanjeet\MEAN\mean-stack-example\client
+
+client is angular app-> so just run : ng s
+ng help
+ng version
+(16)
+--------
+
+MongoDB—document database  (noSQL) - key value pair- JSON- opposite of relation db
+Express—a Node.js framework for building APIs
+Angular—front-end application framework
+Node.js—server-side JavaScript runtime environment
+---------------
+In a MEAN stack, the server-side is typically managed using Node.js with Express.js. 
+
+to run server:
+npx ts-node src/server.ts
+
+http://localhost:3000/employees
+This will call the /employees endpoint and should return the list of employees if the database is populated.
+•	Ensure that MongoDB is running locally or is properly connected to your cloud database.
+
+local MongoDB instance
+mongodb://localhost:27017
+-----
+Important Note
+The port 5200 is for HTTP requests (frontend ↔ backend). -->Expressjs
+The port 27017 is for database communication (backend ↔ MongoDB).
+Both ports are unrelated, so there’s no conflict.
+
+-----
+earlier .env file
+-----
+ ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/meanStackExample?retryWrites=true&w=majority
+
+now :
+
+
+
+
+--
+microsoft SQL server
+Azure
+
