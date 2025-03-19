@@ -3,6 +3,8 @@ import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
 import { employeeRouter } from "./employee.routes";
+import authRoutes from "./routes/auth";
+
 
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
@@ -18,7 +20,8 @@ connectToDatabase(uri)
    .then(() => {
        const app = express();
        app.use(cors());
- 
+       app.use(express.json()); // ✅ Required for parsing JSON bodies
+       app.use("/api/auth", authRoutes);
        app.use("/employees", employeeRouter);
 
 
