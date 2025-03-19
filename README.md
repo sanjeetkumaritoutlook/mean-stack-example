@@ -13,7 +13,7 @@ ng version
 (16)
 this runs on port 4200
 
-### server
+### server [ same as nest-proxy routing different API calls to services]
 npm install
 
 npx ts-node src/server.ts
@@ -25,6 +25,12 @@ this act as middleman between client and Database
 this is express.js web server port
 
 ### local MongoDB instance
+Instead of using Mongoose, let's use the MongoDB Native Driver.
+
+This means no schemas, but you get direct control over MongoDB operations.
+
+no need to install mongoose (npm install -g mongosh). just mongodb compass enough
+
 mongodb://localhost:27017
 
 ## this contains two functionalities with client -> server -> database
