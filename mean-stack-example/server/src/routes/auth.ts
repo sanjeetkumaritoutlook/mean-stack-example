@@ -4,7 +4,10 @@ import jwt from "jsonwebtoken";
 import { body, validationResult } from "express-validator"; // ✅ Correct import
 
 const router = Router();
-const users: { username: string; password: string }[] = [];
+//const users: { username: string; password: string }[] = [];
+//more real
+const users: { name: string; email: string; phone: string; username: string; password: string }[] = [];
+
 const JWT_SECRET = "your_secret_key";
 
 router.post(
@@ -34,6 +37,9 @@ router.post(
 router.post(
   "/register",
   [
+    body("name").notEmpty().withMessage("Name is required"),
+    body("email").isEmail().withMessage("Invalid email format"),
+    body("phone").isLength({ min: 10, max: 15 }).withMessage("Phone number must be 10-15 digits"),
     body("username").notEmpty().withMessage("Username is required"),
     body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
   ],
@@ -41,9 +47,9 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-    const { username, password } = req.body;
+    const { name, email, phone, username, password } = req.body;
 
-    // Check if the user already exists
+    // Check if user already exists
     if (users.find((u) => u.username === username)) {
       return res.status(400).json({ msg: "User already exists" });
     }
@@ -53,7 +59,7 @@ router.post(
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Save the new user
-    users.push({ username, password: hashedPassword });
+    users.push({ name, email, phone, username, password: hashedPassword });
 
     res.status(201).json({ msg: "User registered successfully" });
   }

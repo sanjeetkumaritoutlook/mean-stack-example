@@ -1,21 +1,33 @@
 ## main MEAN app named-> mean-stack-example
 ### client
-run : ng s
+run :
+
+npm install
+
+ng s
+
 ng help
+
 ng version
+
 (16)
 this runs on port 4200
 
 ### server
+npm install
+
 npx ts-node src/server.ts
+
 this runs on port 5200
+
 this act as middleman between client and Database
+
 this is express.js web server port
 
 ### local MongoDB instance
 mongodb://localhost:27017
 
-## this contains two app
+## this contains two functionalities with client -> server -> database
 1. employees add
 
 2. login->register->logout with JWT token
@@ -46,8 +58,12 @@ db.createCollection("collectionName");
 
 
 ## first is a standalone server that updates mongodb students 
-run
+run:
+
 node server.js
+
 http://localhost:3000/
+
 http://localhost:3000/tproute
+
 http://localhost:3000/api/students
