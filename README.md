@@ -72,7 +72,23 @@ db.createCollection("collectionName");
 
 ✅  Hash Passwords Before Saving in MongoDB, bcrypt is hashing passwords
 
+## JWT is used for authentication and authorization. Here's the typical flow:
 
+✅ Step-by-Step JWT Authentication Flow
+
+1️⃣ User logs in (POST /api/auth/login) by providing a username and password.
+
+2️⃣ Server verifies credentials and generates a JWT token signed with JWT_SECRET.
+
+3️⃣ Server sends the JWT to the frontend (React/Angular/Vue) as a response
+
+4️⃣F rontend stores the JWT (usually in localStorage or sessionStorage).
+
+5️⃣ On subsequent requests, the frontend sends the token in the Authorization header: Authorization Bearer
+
+6️⃣  Server validates the token on protected routes (employees, dashboard, etc.).
+
+7️⃣ If valid, access is granted. If invalid or expired, the user is logged out.
 
 
 ## first is a standalone server that updates mongodb students 

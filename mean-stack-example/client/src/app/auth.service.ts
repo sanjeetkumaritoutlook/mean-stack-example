@@ -39,8 +39,24 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  //used in auth guard
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return token ? !this.jwtHelper.isTokenExpired(token) : false;
   }
+
+   // ✅ Get JWT from localStorage
+   getToken(): string | null {
+    return localStorage.getItem("token");
+  }
+   // ✅ Decode JWT to get user data
+   getDecodedToken(): any {
+    const token = this.getToken();
+    return token ? this.jwtHelper.decodeToken(token) : null;
+  }
+    // ✅ Check if JWT is expired
+    isTokenExpired(): boolean {
+      const token = this.getToken();
+      return token ? this.jwtHelper.isTokenExpired(token) : true;
+    }
 }
