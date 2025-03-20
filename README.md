@@ -82,13 +82,23 @@ db.createCollection("collectionName");
 
 3️⃣ Server sends the JWT to the frontend (React/Angular/Vue) as a response
 
-4️⃣F rontend stores the JWT (usually in localStorage or sessionStorage).
+4️⃣ Frontend stores the JWT (usually in localStorage or sessionStorage).
 
 5️⃣ On subsequent requests, the frontend sends the token in the Authorization header: Authorization Bearer
+
+5.5 Angular automatically attach thhis token to protected API calls/requests using HttpInterceptor
 
 6️⃣  Server validates the token on protected routes (employees, dashboard, etc.).
 
 7️⃣ If valid, access is granted. If invalid or expired, the user is logged out.
+
+ng generate interceptor interceptors/token
+
+✔ Login works without Authorization header because login is public.
+
+✔ For protected routes, JWT must be attached in the Authorization header.
+
+✔ TokenInterceptor automatically adds the JWT for all HTTP requests.
 
 
 ## first is a standalone server that updates mongodb students 
