@@ -1,6 +1,10 @@
 //import mongoose from "mongoose";
 //Instead of using Mongoose, let's use the MongoDB Native Driver.
 // This means no schemas, but you get direct control over MongoDB operations.
+//modify User.ts to allow switching between different collections dynamically based on the request type (e.g., users for authentication, employees for employee management).
+
+//✅ Ensures MongoDB is connected before accessing collections
+
 
 // const UserSchema = new mongoose.Schema({
 //   name: { type: String, required: true },
@@ -23,6 +27,7 @@ const client = new MongoClient(MONGO_URI);
 // Database & Collection references
 let db: Db;
 let usersCollection: Collection;
+let employeesCollection: Collection;
 
 // Function to connect to the database
 export async function connectToDatabase() {
@@ -31,17 +36,25 @@ export async function connectToDatabase() {
         console.log("✅ Connected to MongoDB using Native Driver!");
 
         db = client.db("meanStackExample"); // Replace with your actual database name
-        usersCollection = db.collection("users"); // Collection reference
+
+        // ✅ Create separate collections
+        usersCollection = db.collection("users");
+        employeesCollection = db.collection("employees");
+
     } catch (error) {
         console.error("❌ MongoDB connection error:", error);
         process.exit(1);
     }
 }
 
-// Function to get the users collection
-export function getUsersCollection() {
-    if (!usersCollection) {
-        throw new Error("MongoDB is not connected. Call `connectToDatabase()` first.");
+// Function to get collections dynamically
+export function getCollection(collectionName: "users" | "employees"): Collection {
+    if (!db) {
+        throw new Error("❌ Database not connected. Call `connectToDatabase()` first.");
     }
-    return usersCollection;
+
+    if (collectionName === "users") return usersCollection;
+    if (collectionName === "employees") return employeesCollection;
+
+    throw new Error(`❌ Collection '${collectionName}' not found.`);
 }

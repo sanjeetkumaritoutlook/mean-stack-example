@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
+
 @Component({
   selector: 'app-employees-list',
   template: `
@@ -32,13 +33,13 @@ import { EmployeeService } from '../employee.service';
  
    <button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Employee</button>
  `,
-  styles: [
-  ]
+  styles: []
 })
 export class EmployeesListComponent implements OnInit {
-  employees$: Observable<Employee[]> = new Observable();
+  employees$!: Observable<Employee[]>; // ✅ Properly define employees$ as Observable
+
   constructor(private employeesService: EmployeeService) { }
- 
+
   ngOnInit(): void {
     this.fetchEmployees();
   }
@@ -50,6 +51,6 @@ export class EmployeesListComponent implements OnInit {
   }
   
   private fetchEmployees(): void {
-    this.employees$ = this.employeesService.getEmployees();
+    this.employees$ = this.employeesService.getEmployees(); // ✅ Now correctly subscribes to Observable
   }
 }
