@@ -8,6 +8,7 @@ import { getCollection } from "../models/User";
 dotenv.config();
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";;
+console.log("🔑 Using JWT_SECRET:", JWT_SECRET);
 
 // ✅ Register User (Using `users` collection)
 router.post(

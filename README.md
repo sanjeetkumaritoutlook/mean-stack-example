@@ -61,6 +61,18 @@ show collections;
 Create a collection (optional, usually created when inserting data):
 db.createCollection("collectionName");
 
+## ✅ User Authentication (Register/Login using users collection)
+✅ Employee Management (CRUD operations using employees collection)
+
+✅ MongoDB Native Driver Setup (No Mongoose, fully optimized)
+
+✅ Correct API Responses (Fixed issues with NG02200 and incorrect API structures)
+
+✅ Dynamic Collection Handling (Using getCollection("users") and getCollection("employees"))
+
+✅  Hash Passwords Before Saving in MongoDB, bcrypt is hashing passwords
+
+
 
 
 ## first is a standalone server that updates mongodb students 
