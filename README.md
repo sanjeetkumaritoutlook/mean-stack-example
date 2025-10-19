@@ -4,8 +4,9 @@ run :
 
 npm install
 
+```
 ng s
-
+```
 ng help
 
 ng version
@@ -13,10 +14,16 @@ ng version
 (16)
 this runs on port 4200
 
+```
+ng generate environments
+```
+
 ### server [ same as nest-proxy routing different API calls to services]
 npm install
 
+```
 npx ts-node src/server.ts
+```
 
 this runs on port 5200
 
@@ -24,6 +31,17 @@ this act as middleman between client and Database
 
 this is express.js web server port
 
+## mongodb Atlas free tier
+project
+
+cluster
+
+create separate .env file in server folder for local development
+```
+ ATLAS_URI= connection_string
+ JWT_SECRET="your_value"  
+ PORT=5200
+```
 ### local MongoDB instance
 Instead of using Mongoose, let's use the MongoDB Native Driver.
 

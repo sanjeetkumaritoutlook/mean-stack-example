@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
-
+import * as e from 'express';
+import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:5200/api/auth';
+  private apiUrl = `${environment.apiUrl}/api/auth`; // ✅ Use environment variable
   private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -22,7 +23,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post<{ token: string }>(
-      'http://localhost:5200/api/auth/login',  // ✅ Correct URL
+      `${this.apiUrl}/api/auth/login`,  // ✅ Correct URL
       { username, password },                   // ✅ Send JSON request body
       { headers: { 'Content-Type': 'application/json' } } // ✅ Ensure headers are set
     ).subscribe(res => {
