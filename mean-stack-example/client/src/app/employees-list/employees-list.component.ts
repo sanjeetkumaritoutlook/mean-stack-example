@@ -6,6 +6,7 @@ import { EmployeeService } from '../employee.service';
 @Component({
   selector: 'app-employees-list',
   template: `
+    <p>Note: server is deployed on render, so there can be a delay of abt 50 s if you click Add button for registering new employee or loading the employee list</p>
    <h2 class="text-center m-5">Employees List</h2>
  
    <table class="table table-striped table-bordered">

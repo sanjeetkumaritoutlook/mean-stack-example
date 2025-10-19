@@ -7,7 +7,7 @@ import { connectToDatabase } from "./models/User"; // ✅ Now using native Mongo
 import { employeeRouter } from "./employee.routes";
 import authRoutes from "./routes/auth";
 
-
+//User.ts is the file that connects to mondodb, not this file anymore
 // Load environment variables from the .env file, where the ATLAS_URI is configured
 dotenv.config();
  
@@ -17,7 +17,7 @@ if (!ATLAS_URI) {
    console.error("No ATLAS_URI environment variable has been defined in config.env");
    process.exit(1);
 }
- const uri = 'mongodb://localhost:27017/meanStackExample';
+// const uri = 'mongodb://localhost:27017/meanStackExample';
 // connectToDatabase(uri)
 //    .then(() => {
 //        const app = express();
