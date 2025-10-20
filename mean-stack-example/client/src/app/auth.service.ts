@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/api/auth`; // ✅ Use environment variable
+  private apiUrl = `${environment.apiUrl}`; // ✅ Use environment variable
   private jwtHelper = new JwtHelperService();
   
   // Loading state management
