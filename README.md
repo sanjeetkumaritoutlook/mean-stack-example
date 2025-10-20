@@ -56,7 +56,9 @@ mongodb://localhost:27017
 
 2. login->register->logout with JWT token
 
-
+```
+two users: jane2025 and sanjeetkumarit
+```
 
 ## Database
 A database in MongoDB is a container that holds one or more collections. It is similar to a database in a traditional relational database system.

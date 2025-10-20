@@ -32,7 +32,10 @@ import { EmployeeService } from '../employee.service';
        </tbody>
    </table>
  
-   <button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Employee</button>
+   <div class="d-grid gap-2">
+     <button class="btn btn-primary mt-3" [routerLink]="['new']">Add a New Employee</button>
+     <button class="btn btn-primary" [routerLink]="['login']">Login to register a new user</button>
+   </div>
  `,
   styles: []
 })
