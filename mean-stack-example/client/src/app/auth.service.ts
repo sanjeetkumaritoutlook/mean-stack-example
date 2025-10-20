@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Observable, BehaviorSubject } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import * as e from 'express';
 import { environment } from '../environments/environment';
 @Injectable({
@@ -11,6 +14,10 @@ export class AuthService {
 
   private apiUrl = `${environment.apiUrl}/api/auth`; // ✅ Use environment variable
   private jwtHelper = new JwtHelperService();
+  
+  // Loading state management
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingSubject.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -21,17 +28,27 @@ export class AuthService {
   //   });
   // }
 
-  login(username: string, password: string) {
-    return this.http.post<{ token: string }>(
+  login(username: string, password: string): Observable<{token: string, message?: string}> {
+    this.loadingSubject.next(true); // Start loading
+    
+    return this.http.post<{ token: string, message?: string }>(
       `${this.apiUrl}/api/auth/login`,  // ✅ Correct URL
       { username, password },                   // ✅ Send JSON request body
       { headers: { 'Content-Type': 'application/json' } } // ✅ Ensure headers are set
-    ).subscribe(res => {
-      localStorage.setItem('token', res.token);
-      this.router.navigate(['/register']);
-    }, error => {
-      console.error('Login failed', error);
-    });
+    ).pipe(
+      tap(res => {
+        // Success handling
+        localStorage.setItem('token', res.token);
+        this.loadingSubject.next(false); // Stop loading
+        this.router.navigate(['/register']);
+      }),
+      catchError(error => {
+        // Error handling
+        this.loadingSubject.next(false); // Stop loading
+        console.error('Login failed', error);
+        return throwError(() => error);
+      })
+    );
   }
   
 

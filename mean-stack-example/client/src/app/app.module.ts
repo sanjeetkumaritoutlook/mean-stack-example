@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { ToastComponent } from './components/toast.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AddEmployeeComponent,
     EditEmployeeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

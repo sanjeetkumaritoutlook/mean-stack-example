@@ -7,7 +7,7 @@ import { Employee } from '../employee';
   template: `
   <form class="employee-form" autocomplete="off" [formGroup]="employeeForm" (ngSubmit)="submitForm()">
     <div class="form-floating mb-3">
-      <input class="form-control" type="text" id="name" formControlName="name" placeholder="Name" required>
+      <input class="form-control" type="text" id="name" formControlName="name" placeholder="Name" [disabled]="isLoading" required>
       <label for="name">Name</label>
     </div>
 
@@ -21,7 +21,7 @@ import { Employee } from '../employee';
     </div>
 
     <div class="form-floating mb-3">
-      <input class="form-control" type="text" formControlName="position" placeholder="Position" required>
+      <input class="form-control" type="text" formControlName="position" placeholder="Position" [disabled]="isLoading" required>
       <label for="position">Position</label>
     </div>
 
@@ -37,21 +37,28 @@ import { Employee } from '../employee';
 
     <div class="mb-3">
       <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-junior" value="junior" required>
+        <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-junior" value="junior" [disabled]="isLoading" required>
         <label class="form-check-label" for="level-junior">Junior</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-mid" value="mid">
+        <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-mid" value="mid" [disabled]="isLoading">
         <label class="form-check-label" for="level-mid">Mid</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-senior"
-          value="senior">
+          value="senior" [disabled]="isLoading">
         <label class="form-check-label" for="level-senior">Senior</label>
       </div>
     </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="employeeForm.invalid">Add</button>
+    <button 
+      class="btn btn-primary" 
+      type="submit" 
+      [disabled]="employeeForm.invalid || isLoading"
+    >
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      {{ isLoading ? (buttonText === 'Add' ? 'Adding...' : 'Updating...') : buttonText }}
+    </button>
   </form>
 `,
   styles: [
@@ -59,6 +66,11 @@ import { Employee } from '../employee';
       max-width: 560px;
       margin-left: auto;
       margin-right: auto;
+    }
+    
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
     }`
   ]
 })
@@ -67,6 +79,12 @@ export class EmployeeFormComponent  implements OnInit{
   //because we might pass async data into the form.
   @Input()
   initialState: BehaviorSubject<Employee> = new BehaviorSubject({});
+  
+  @Input()
+  isLoading: boolean = false;
+  
+  @Input()
+  buttonText: string = 'Add';
   
   @Output()
   formValuesChanged = new EventEmitter<Employee>();

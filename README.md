@@ -88,7 +88,9 @@ db.createCollection("collectionName");
 
 ✅ Dynamic Collection Handling (Using getCollection("users") and getCollection("employees"))
 
+```
 ✅  Hash Passwords Before Saving in MongoDB, bcrypt is hashing passwords
+```
 
 ## JWT is used for authentication and authorization. Here's the typical flow:
 
